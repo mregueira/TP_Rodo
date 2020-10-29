@@ -6,6 +6,11 @@ Q=[th1 th2];
 Qd=[thd1 thd2];
 Qdd=[thdd1 thdd2];
 syms L1 L2 g Ixx1 Iyy1 Izz1 m1 Ixx2 Iyy2 Izz2 m2  theta1 d2 real
+g = 10;
+L1 = 1;
+L2 = 1;
+m1 = 1;
+m2 = 1;
 gravedad=[0 -g 0];
 % L1=1;
 % L2=1;
@@ -54,7 +59,3 @@ Tau=M*Qdd'+V+G;
 TAU = Robot.rne(Q, Qd, Qdd);
 TAU(1)
 TAU(2)
-
-
-
-
