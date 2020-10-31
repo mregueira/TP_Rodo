@@ -59,3 +59,6 @@ Tau=M*Qdd'+V+G;
 TAU = Robot.rne(Q, Qd, Qdd);
 TAU(1);
 TAU(2);
+
+% Condiciones iniciales
+q0 = [1;-1];
