@@ -48,7 +48,7 @@ T1 = Link1.A(th1) ;
 T2 = Link2.A(th2);
 Tt = double(T1) * double(T2) * Tool;
 
-q0 = [0 0];
+% q0 = [1 -1];
 % Robot.teach(q0) %modelo dinamico de posicion inicial q
 M=Robot.inertia(Q);
 V=Robot.coriolis(Q,Qd)*Qd'; %Matriz de coriolis
@@ -60,9 +60,6 @@ TAU = Robot.rne(Q, Qd, Qdd);
 TAU(1);
 TAU(2);
 
-% Condiciones iniciales
-q0 = [1;-1];
-
 % Ganancias Critico Amortiguado
-kp = 1;
+kp = 0.5;
 kv = 2*sqrt(kp);
