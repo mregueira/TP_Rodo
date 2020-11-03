@@ -62,3 +62,7 @@ TAU(2);
 
 % Condiciones iniciales
 q0 = [1;-1];
+
+% Ganancias Critico Amortiguado
+kp = 1;
+kv = 2*sqrt(kp);
