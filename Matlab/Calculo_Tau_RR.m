@@ -11,7 +11,7 @@ L1 = 1;
 L2 = 1;
 m1 = 1;
 m2 = 1;
-gravedad=[0 -g 0];
+gravedad=[0 0 -g];
 % L1=1;
 % L2=1;
 %parametros DH
@@ -61,5 +61,5 @@ TAU(1);
 TAU(2);
 
 % Ganancias Critico Amortiguado
-kp = 0.5;
+kp = 20;
 kv = 2*sqrt(kp);
