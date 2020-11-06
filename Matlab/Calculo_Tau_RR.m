@@ -1,19 +1,18 @@
 %% RR
 clear all;
 clc;
-syms th1 th2 thd1 thd2  thdd1 thdd2 real
+syms th1 th2 thd1 thd2  thdd1 thdd2 real;
 Q=[th1 th2];
 Qd=[thd1 thd2];
 Qdd=[thdd1 thdd2];
-syms L1 L2 g Ixx1 Iyy1 Izz1 m1 Ixx2 Iyy2 Izz2 m2  theta1 d2 real
+syms L1 L2 g Ixx1 Iyy1 Izz1 m1 Ixx2 Iyy2 Izz2 m2  theta1 d2 real;
 g = 10;
 L1 = 1;
 L2 = 1;
 m1 = 1;
 m2 = 1;
 gravedad=[0 0 -g];
-% L1=1;
-% L2=1;
+
 %parametros DH
 alpha=[0 0 0];
 a=[0 L1 L2];
@@ -61,5 +60,5 @@ TAU(1);
 TAU(2);
 
 % Ganancias Critico Amortiguado
-kp = 20;
+kp = 3;
 kv = 2*sqrt(kp);
