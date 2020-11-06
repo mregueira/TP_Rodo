@@ -1,0 +1,102 @@
+\documentclass[ca_tp2_main.tex]{subfiles}
+\begin{document}
+\newgeometry{top=2.5cm, bottom=2.0cm, left=2.25cm, right=2.25cm}
+\section{Compensación}
+\subsection{Problema 5}
+
+Se tiene la siguiente planta, con el aproximante de retardo de media muestra:
+\[
+P(s) = \dfrac{2 e^{-0.5s}}{\left(\dfrac{s}{5} +1\right) \left(\dfrac{s}{0.25}+1\right)} = \dfrac{2.5 e^{-0.5s}}{(s+5)(s+0.25)}
+\]
+Se la separa en parte de fase mínima y parte pasa todo:
+\[
+P(s) = \underbrace{\dfrac{2.5}{(s+5)(s+0.25)}}_{P_{mp}} \cdot \underbrace{e^{-0.5s}}_{P_{ap}}
+\]
+Con esta separación, podemos plantear un diseño para el controlador con acción integral, con el siguiente formato:
+\[
+C(s) = \frac{k}{s} \cdot P^{-1}_{mp} = \frac{k}{s} \cdot \dfrac{(s+5)(s+0.25)}{2.5}
+\]
+Esta transferencia resulta impropia, por lo que se le añade un polo lejano a los de la planta para que no invadan la dinámica del sistema, y el controlador quede bipropio. A su vez, cumplir con el criterio de Nyquist para el polo más alto. De esta forma, la planta y el controlador resultan:
+\[
+P(s) = \dfrac{2.5 e^{-0.5s}}{(s+5)(s+0.25)} \hspace{2cm} C(s) = \frac{k}{s} \cdot \dfrac{(s+5)(s+0.25)}{2.5(s+100)}
+\]
+
+Tomando inicialmente $k=1$, se realiza el diagrama de Bode de $L(s)=P(s)\cdot C(s)$, para hallar los valores de ganancia necesarios tal que mantenga un margen de fase $\leq 60^{\circ}$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{images/P5/P5_L_freq.png}
+\caption{Diagrama de Bode - $L(s)$ con $k=1$}
+\end{figure}
+\newpage
+De donde se obtiene que:
+\[
+-40.1dB \equiv 9.88\cdot 10^{-3} \textrm{(veces)} \Longrightarrow k < 100
+\]
+Dentro de dicho rango, se toma $k=95$, de manera de conseguir el mayor ancho de banda a lazo cerrado posible, manteniendo un $OS \leq 5\%$ y un tiempo de establecimiento menor a 3.5s. 
+\par
+Para verificar la estabilidad se traza el diagrama de Nyquist correspondiente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{images/P5/P5_L_nyq.png}
+\caption{Diagrama de Nyquist - $L(s)$ con $k=95$}
+\end{figure}
+
+De donde observamos que se tienen $P=0$ polos en el SPD, $N=0$ circunvoluciones alrededor del $-1$ en sentido antihorario, teniendo entonces $Z=P-N=0$ polos en el SPD a lazo cerrado. Por lo tanto, el sistema resulta estable. Las múltiples circunvoluciones se deben al factor de retardo de media muestra.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\linewidth]{images/P5/P5_stepOS.png}
+\caption{Respuesta al escalón y(t) y u(t) - Medición de OS}
+\end{figure}
+
+Tomando la respuesta al escalón $r(t)$ (aplicado en 1s) de la salida verificamos que el overshoot es menor al $5\%$, y el tiempo de establecimiento menor a 3.5s. La salida $u(t)$ corresponde a la respuesta de la acción de control (se muestra escalada respecto a su valor real, debido a la alta ganancia de $CS(s)$, como se mostrará luego).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{images/P5/P5_T_freq.png}
+\caption{Diagrama de Bode - $T(s)$ ($R(s) \rightarrow Y(s)$)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/P5/P5_CS_freq.png}
+\caption{Diagrama de Bode - $CS(s)$ ($R(s) \rightarrow U(s)$)}
+\end{figure}
+
+Comparando la fase de $T(s)$ y $CS(s)$ para las altas frecuencias, notamos que $T(s)$ tiene un mayor retraso, lo cual se ve reflejado en que la respuesta transitoria $y(t)$ tarda más en estabilizarse que $u(t)$. A su vez, se verifica que en efecto $CS(s)$ tiene una ganancia alta, como se mencionó anteriormente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/P5/P5_stepRyV.png}
+\caption{Respuesta al escalón y(t) y u(t) - Entradas r(t) y v(t)}
+\end{figure}
+
+En este caso se agrega una perturbación escalón $v(t)$ en 8s, observando que el sistema la rechaza efectivamente en la salida $y(t)$. La salida de la acción $u(t)$ queda afectada por un escalón negativo, pero es muy pequeño comparado a la amplitud de respuesta obtenida frente al efecto de sólo $r(t)$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/P5/P5_PS_freq.png}
+\caption{Diagrama de Bode - $PS(s)$ ($V(s) \rightarrow Y(s)$)}
+\end{figure}
+
+En este caso notamos que la fase cambia gradualmente, con un defasaje adicional en bajas frecuencuias de $90^{\circ}$ respecto a la fase de $T(s)$, lo cual se ve reflejado en la respuesta transitoria a la perturbación de entrada $v(t)$ mostrada anteriormente, que demora más en estabilizarse en comparación a la respuesta transitoria a la entrada $r(t)$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/P5/P5_S_freq.png}
+\caption{Diagrama de Bode - $S(s)$ ($R(s) \rightarrow E(s)$)}
+\end{figure}
+
+En la respuesta en módulo de la sensibilidad y sensibilidad complementaria, se indica aproximadamente la frecuencia de cruce, que está dentro del rango de robustez acotado previamente al elegir $k$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{images/P5/P5_stepZ.png}
+\caption{Respuesta al escalón - $T(z)$ - $T_s = 20ms$}
+\end{figure}
+
+Mediante la aproximación de Tustin, se convierte la transferencia del controlador al dominio Z, usando un período de muestreo de $20ms$, y con un prewarping a la frecuencia de cruce (para mantener el margen de fase). Vemos que la respuesta obtenida con el modelo discretizado en este caso aproxima muy bien al modelo continuo.
+
+\end{document}
