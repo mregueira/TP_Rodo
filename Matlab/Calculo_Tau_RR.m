@@ -83,5 +83,5 @@ Robot = SerialLink( [links{:}], 'tool', Tool,'name', 'Chaplin' );
 % TAU(2);
 
 % Ganancias
-kp = 10;
+kp = 20;
 kv = 2*sqrt(kp);

@@ -4,8 +4,8 @@ ke = diag([cos(pi/4)*Kenv, sin(pi/4)*Kenv]);
 fd = [10*cos(pi/4), 10*sin(pi/4)];
 
 % Ganancias Critico Amortiguado
-kpf = 20;
-kvf = 2*sqrt(kpf);
+kpf = 10;
+kvf = 100;
 
 % condiciones iniciales para que el EE este apoyado en la pared, y con
 % orientacion perpendicular a la misma. viene de resolver 
