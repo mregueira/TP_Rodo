@@ -60,5 +60,5 @@ TAU(1);
 TAU(2);
 
 % Ganancias Critico Amortiguado
-kp = 3;
-kv = 2*sqrt(kp);
+kp = 75;
+kv = 20;

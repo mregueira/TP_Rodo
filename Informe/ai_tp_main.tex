@@ -1,0 +1,42 @@
+\documentclass{article}
+
+% preambulo:
+\input{ca_tp2_preamble.tex}
+
+
+\begin{document}
+
+\newgeometry{} % margenes default para la caratula
+% caratula:
+\input{ca_tp2_caratula.tex}
+
+% indice:
+\newgeometry{top=2.5cm, bottom=2.0cm, left=2.25cm, right=2.25cm}
+
+\setcounter{page}{0}
+\tableofcontents
+\newpage
+
+% cambio los margenes para el resto del documento
+%\newgeometry{total={6in, 8in}}
+\newgeometry{top=2.5cm, bottom=2.0cm, left=2.25cm, right=2.25cm}
+
+\subfile{ca_tp2_ej5.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\subfile{ca_tp2_ej6.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\subfile{ca_tp2_ej7.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\subfile{ca_tp2_ej8.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\subfile{ca_tp2_ej9.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\subfile{ca_tp2_ejAnexo.tex}
+\clearpage % flush de los floats que queden y nueva pagina
+
+\end{document}
