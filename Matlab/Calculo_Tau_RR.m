@@ -39,11 +39,13 @@ d=[0 0 0];
 % Link1.m=m1;
 % Link2.m=m2;
 N = 2;
+%Perturbacion
+pert = 0;
 % Masa 1kg
-m = 1;
+m = 1 +(2*rand()-1)*pert;
 % Centro de masa en extremo:  'r', [1 0 0]
 r=1;
-rv = [r, 0, 0];
+rv = [r+(2*rand()-1)*pert, (2*rand()-1)*pert, 0];
 
 % Friccion unitaria:     'B', 1
 b = 1;  
@@ -65,23 +67,46 @@ Tool = transl([L2, 0, 0]); % Offset de la herramienta (End Effector)
 
 Robot = SerialLink( [links{:}], 'tool', Tool,'name', 'Chaplin' );
 
-% Robot.gravity=gravedad;
-% T1 = Link1.A(th1) ;
-% T2 = Link2.A(th2);
-% Tt = double(T1) * double(T2) * Tool;
-% 
-% % q0 = [1 -1];
-% % Robot.teach(q0) %modelo dinamico de posicion inicial q
-% M=Robot.inertia(Q);
-% V=Robot.coriolis(Q,Qd)*Qd'; %Matriz de coriolis
-% G=Robot.gravload(Q);
-% Tau=M*Qdd'+V+G;
-% 
+%% El Robot Perturbado
+%Perturbacion
+pert = 0.8;
+% Masa 1kg
+m = 1 +(2*rand()-1)*pert;
+% Centro de masa en extremo:  'r', [1 0 0]
+r=1;
+rv = [r+(2*rand()-1)*pert, (2*rand()-1)*pert, 0];
+
+% Friccion unitaria:     'B', 1
+b = 1;  
+
+% Planar, sin momento de inercia.
+g=10;
+
+DH = struct('d', cell(1,N), 'a', cell(1,N), 'alpha', cell(1,N), 'theta', cell(1,N),...
+    'type', cell(1,N)); %genera estructura base
+DH(1).alpha = 0;    DH(1).a = 0;    DH(1).d = 0;    DH(1).type = 'R';
+DH(2).alpha = 0;    DH(2).a = L1;   DH(2).d = 0;    DH(2).type = 'R';
+
+for  iLink = 1:N
+        links_p{iLink} = Link('d', DH(iLink).d, 'a', DH(iLink).a, 'alpha', ...
+            DH(iLink).alpha, 'm', m, 'r', rv, 'B', b, 'modified'); % Vector de estructuras Link
+end
+
+Tool = transl([L2, 0, 0]); % Offset de la herramienta (End Effector)
+
+Robot_p = SerialLink( [links_p{:}], 'tool', Tool,'name', 'Chaplin_p' );
+%%
+
+M=Robot.inertia(Q);
+V=Robot.coriolis(Q,Qd)*Qd'; %Matriz de coriolis
+G=Robot.gravload(Q);
+Tau=M*Qdd'+V+G;
+
 % % Taui=Robot.itorque(Q,Qdd);
 % TAU = Robot.rne(Q, Qd, Qdd);
 % TAU(1);
 % TAU(2);
 
 % Ganancias
-kp = 20;
+kp = 100;
 kv = 2*sqrt(kp);

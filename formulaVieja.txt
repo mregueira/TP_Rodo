@@ -1,0 +1,29 @@
+\begin{comment} 
+  \begin{equation}
+      M(\theta) = 
+     \begin{pmatrix}
+        2 cos(\theta_2) + 3 & cos(\theta_2) + 1 \\
+        cos(\theta_2) + 1 & 1
+    \end{pmatrix}
+    \hspace{1cm}
+     V(\theta, \dot{\theta}) =
+     \begin{pmatrix}
+        -\dot{\theta_2} \cdot sin(\theta_2) \cdot (2 \dot{\theta_1} + \dot{\theta_2})  \\
+        \dot{\theta_1}^2 \cdot sin(\theta_2) 
+    \end{pmatrix}
+ \end{equation}
+ 
+   \begin{equation}
+    G(\theta) = 
+     \begin{pmatrix}
+        0 & 0 
+    \end{pmatrix}
+        \hspace{1cm}
+      \tau = 
+     \begin{pmatrix}
+        -sin(\theta_1) \dot{\theta_2}^2 -2 \dot{\theta_1} sin(\theta_2) \dot{\theta_2} + 3\ddot{\theta_1} + \ddot{\theta_2} + 2\ddot{\theta_1} cos(\theta_2) + \ddot{\theta_2} cos(\theta_2) 
+        \\
+        \ddot{\theta_1} 
+    \end{pmatrix}
+ \end{equation}
+ \end{comment} 
