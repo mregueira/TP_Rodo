@@ -1,10 +1,10 @@
-Kenv = 1e6; % 1000N/mm=1e6N/m
+Kenv = 1e3; % 1000N/mm=1e6N/m
 ke = diag([cos(pi/4)*Kenv, sin(pi/4)*Kenv]);
 % la direccion normal a la pared es pared tiene una normal a 45º 
-fd = [10*cos(pi/4), 10*sin(pi/4)];
+fd = 10;
 
 % Ganancias Critico Amortiguado
-kpf = 100;
+kpf = 144;
 kvf = 2*sqrt(kpf);
 
 % condiciones iniciales para que el EE este apoyado en la pared, y con
@@ -13,4 +13,6 @@ kvf = 2*sqrt(kpf);
 % y ademas theta_2 = abs(theta_1)+45 
 theta0_1 = -20.53*pi/180;
 theta0_2 = pi/4 +abs(theta0_1);
+
+R_Pared_Cart = [cos(pi/4) sin(pi/4);-sin(pi/4) cos(pi/4)];
 

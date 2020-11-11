@@ -108,5 +108,5 @@ Tau=M*Qdd'+V+G;
 % TAU(2);
 
 % Ganancias
-kp = 81;
+kp = 1000;
 kv = 2*sqrt(kp);
