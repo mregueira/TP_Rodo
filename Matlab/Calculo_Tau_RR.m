@@ -1,5 +1,4 @@
 %% RR
-clear all;
 clc;
 syms th1 th2 thd1 thd2  thdd1 thdd2 real;
 Q=[th1 th2];
@@ -108,5 +107,5 @@ Tau=M*Qdd'+V+G;
 % TAU(2);
 
 % Ganancias
-kp = 81;
+kp = 25;
 kv = 2*sqrt(kp);

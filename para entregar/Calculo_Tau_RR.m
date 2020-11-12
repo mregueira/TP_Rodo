@@ -1,5 +1,7 @@
-%% RR
-clear all;
+%% TP Final - Automacion Industrial
+% Nota: Para correr el control de fuerza y el hibrido
+%       se debe correr ademas el archivo ctrl_fuerza.m
+%% Manipulador RR
 clc;
 syms th1 th2 thd1 thd2  thdd1 thdd2 real;
 Q=[th1 th2];
@@ -108,5 +110,5 @@ Tau=M*Qdd'+V+G;
 % TAU(2);
 
 % Ganancias
-kp = 1000;
+kp = 25;
 kv = 2*sqrt(kp);
